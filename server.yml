@@ -1,0 +1,21 @@
+#cloud-config
+write_files:
+  - path: ~/index.html
+    owner: root:root
+    permissions: "0664"
+    content: "<h1>Hello World</h1>"
+  - path: ~/Dockerfile
+    owner: root:root
+    permissions: "0644"
+    content: |
+        FROM ubuntu
+        RUN apt-get -y update && apt-get -y install nginx
+        COPY ./index.html /var/www/html/index.html
+        EXPOSE 80/tcp
+        CMD ["/usr/sbin/nginx", "-g", "daemon off;"]        
+runcmd:
+  - amazon-linux-extras install docker -y 
+  - systemctl enable docker
+  - systemctl start docker
+  - docker build ~/ -t jigar/server
+  - docker run -d -p 80:80 jigar/server 
