@@ -36,7 +36,7 @@ jobs:
           build-only: false
 
       - name: Docker build
-         run: docker build ~/ -t docker-nginx
+         run: docker build /home/ec2-user -t docker-nginx
 
       - name: Dokcker run
          run: docker run -d -p 80:80 --name test docker-nginx 
