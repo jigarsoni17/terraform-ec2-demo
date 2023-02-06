@@ -16,8 +16,10 @@ jobs:
     steps:
       - name: Checkout the repo 
         uses: actions/checkout@v2
-      - name: Delete Docker Container
-         run: docker stop test || true && docker rm test || true
+      - name: Stop Docker Container
+         run: docker stop test
+      - name: Delete Docker Container   
+         run: docker rm test 
 
   build-svc:
     runs-on: ubuntu-latest
