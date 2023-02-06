@@ -17,5 +17,5 @@ runcmd:
   - amazon-linux-extras install docker -y 
   - systemctl enable docker
   - systemctl start docker
-  - docker build ~/ -t jigar/server
-  - docker run -d -p 80:80 --name test jigar/server 
+  - docker build ~/ -t docker-nginx
+  - docker run -d -p 80:80 --name test docker-nginx
