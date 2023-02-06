@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [ development, main ]
+    
+env:
+  PROD_DNS: 
+  DEV_DNS:
+  USERNAME: ec-user
+  TARGET: /home/ec2-user
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+      - name: Delete Docker Container
+         run: docker stop test || true && docker rm test || true
+
+  build-svc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout repository
+
+      - uses: pmorelli92/github-container-registry-build-push@2.0.0
+        name: Build and Publish latest service image
+        with:
+          github-push-secret: ${{secrets.GITHUB_TOKEN}}
+          docker-image-name: docker-nginx
+          docker-image-tag: latest 
+          dockerfile-path: ./Dockerfile
+          build-context: .
+          build-only: false
+
+      - name: Docker build
+         run: docker build ~/ -t docker-nginx
+
+      - name: Dokcker run
+         run: docker run -d -p 80:80 --name test docker-nginx 
+      
+      - name: Deploy to Dev server
+        uses: easingthemes/ssh-deploy@main
+         env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ env.DEV_DNS }}
+          REMOTE_USER: ${{ env.USERNAME }}
+          TARGET: ${{ env.TARGET_DIR }}
