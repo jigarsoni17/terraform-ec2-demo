@@ -18,4 +18,4 @@ runcmd:
   - systemctl enable docker
   - systemctl start docker
   - docker build ~/ -t jigar/server
-  - docker run -d -p 80:80 jigar/server 
+  - docker run -d -p 80:80 --name test jigar/server 
