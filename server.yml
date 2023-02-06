@@ -1,10 +1,10 @@
 #cloud-config
 write_files:
-  - path: ~/index.html
+  - path: /home/ec2-user/index.html
     owner: root:root
     permissions: "0664"
     content: "<h1>Hello World</h1>"
-  - path: ~/Dockerfile
+  - path: /home/ec2-user/Dockerfile
     owner: root:root
     permissions: "0644"
     content: |
@@ -17,5 +17,5 @@ runcmd:
   - amazon-linux-extras install docker -y 
   - systemctl enable docker
   - systemctl start docker
-  - docker build ~/ -t docker-nginx
+  - docker build /home/ec2-user -t docker-nginx
   - docker run -d -p 80:80 --name test docker-nginx
