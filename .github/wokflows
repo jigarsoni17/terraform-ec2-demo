@@ -4,19 +4,12 @@ on:
   push:
     branches: [ development ]
     
-<<<<<<< HEAD
+
   workflow_dispatch:
     inputs:
       version:
         description: 'Image version'
         required: true
-=======
-  # workflow_dispatch:
-  #   inputs:
-  #     version:
-  #       description: 'Image version'
-  #       required: true
->>>>>>> main
         
 jobs:
   build_and_push:
