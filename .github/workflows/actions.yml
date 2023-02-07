@@ -23,7 +23,7 @@ jobs:
       - name: Stop Docker Container
         run: |
           chmod +x ./stop-rm.sh
-          ./stop-rm.sh
+          sh ./stop-rm.sh
         shell: bash
 
   build-svc:
