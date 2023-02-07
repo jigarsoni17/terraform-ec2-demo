@@ -24,7 +24,7 @@ jobs:
         run: |
           chmod +x ./stop-rm.sh
          ./stop-rm.sh
-         shell: bash
+        shell: bash
 
   build-svc:
     runs-on: ubuntu-latest
