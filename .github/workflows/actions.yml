@@ -4,11 +4,11 @@ on:
   push:
     branches: [ development ]
     
-env:
-  PROD_DNS: 'ip-10-0-2-249.ec2.internal' 
-  DEV_DNS: 'ec2-34-230-78-100.compute-1.amazonaws.com'
-  USERNAME: 'ec-user'
-  TARGET: '/home/ec2-user'
+# env:
+#   PROD_DNS: 'ip-10-0-2-249.ec2.internal' 
+#   DEV_DNS: 'ec2-34-230-78-100.compute-1.amazonaws.com'
+#   USERNAME: 'ec-user'
+#   TARGET: '/home/ec2-user'
 
 jobs:
   build_and_push:
@@ -22,13 +22,13 @@ jobs:
     steps:
       - name: Checkout the repo 
         uses: actions/checkout@v2 
-        
+    
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ env.DEV_DNS }}
-          username: ${{ env.USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
           script: |
               pwd
               chmod +x ./stop-rm.sh
