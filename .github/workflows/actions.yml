@@ -19,6 +19,7 @@ jobs:
 
   docker:
     runs-on: ubuntu-latest
+    steps:
       - name: Stop Docker Container
         run: docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 
