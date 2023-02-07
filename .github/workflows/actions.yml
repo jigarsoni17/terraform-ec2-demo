@@ -23,8 +23,8 @@ jobs:
       - name: Stop Docker Container
         run: |
           echo "Hello World"
-          echo docker stop $(docker ps -aq)
-          echo docker rm $(docker ps -aq)
+          docker container stop $(docker ps -aq)
+          docker container rm $(docker ps -aq)
 
   build-svc:
     runs-on: ubuntu-latest
