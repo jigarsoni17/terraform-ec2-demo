@@ -23,6 +23,13 @@ jobs:
       - name: Checkout the repo 
         uses: actions/checkout@v2
 
+      - name: Deploy to Dev server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ env.DEV_DNS }}
+          REMOTE_USER: ${{ env.USERNAME }}
+
       - name: Stop Docker Container
         # working-directory: /home/runner/work/terraform-ec2-demo
         run: |
