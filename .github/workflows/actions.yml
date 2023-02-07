@@ -22,7 +22,6 @@ jobs:
     steps:
       - name: Stop Docker Container
         run: |
-          sudo setfacl -m u:ec2-user:rwx /var/run/docker.sock
           docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 
   build-svc:
