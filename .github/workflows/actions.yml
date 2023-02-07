@@ -21,9 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Stop Docker Container
-        run: |
-          pwd
-          bash ./stop-rm.sh
+        working-directory: /home/runner/work/terraform-ec2-demo/
+        run: sh ./stop-rm.sh
         shell: bash
 
   build-svc:
