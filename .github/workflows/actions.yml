@@ -21,7 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Stop Docker Container
-        run: bash ${GITHUB_WORKSPACE}/stop-rm.sh
+        run: |
+        pwd
+        bash ${GITHUB_WORKSPACE}/stop-rm.sh
         shell: bash
 
   build-svc:
