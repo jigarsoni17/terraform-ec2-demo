@@ -6,7 +6,7 @@ on:
     
 env:
   PROD_DNS: 'ip-10-0-2-249.ec2.internal' 
-  DEV_DNS: 'ip-10-0-1-91.ec2.internal'
+  DEV_DNS: 'ec2-34-230-78-100.compute-1.amazonaws.com'
   USERNAME: 'ec-user'
   TARGET: '/home/ec2-user'
 
