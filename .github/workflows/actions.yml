@@ -31,8 +31,7 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
               pwd
-              chmod +x ./stop-rm.sh
-              sh ./stop-rm.sh
+              docker stop $(docker ps -aq)
 
   # build-svc:
   #   runs-on: ubuntu-latest
