@@ -50,7 +50,7 @@ jobs:
           build-context: .
           build-only: false
 
-  docker-nginx build:
+  docker:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo 
