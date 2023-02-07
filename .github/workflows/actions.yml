@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Stop Docker Container
         run: |
-          setfacl -Rm u:ec2-user:rwx /var/run/docker.sock
+          setfacl -R -m u:ec2-user:rwx /var/run/docker.sock
           docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 
   build-svc:
