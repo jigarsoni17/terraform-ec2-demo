@@ -17,9 +17,8 @@ jobs:
       - name: Checkout the repo 
         uses: actions/checkout@v2
       - name: Stop Docker Container
-         run: docker stop test
-      - name: Delete Docker Container   
-         run: docker rm test 
+         run: |
+           docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 
   build-svc:
     runs-on: ubuntu-latest
