@@ -22,7 +22,8 @@ jobs:
     steps:
       - name: Stop Docker Container
         run: |
-          docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+          docker stop $(docker ps -aq)
+          docker rm $(docker ps -aq)
 
   build-svc:
     runs-on: ubuntu-latest
