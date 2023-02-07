@@ -47,7 +47,7 @@ jobs:
       
       - name: Deploy to Dev server
         uses: easingthemes/ssh-deploy@main
-         env:
+        env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ env.DEV_DNS }}
           REMOTE_USER: ${{ env.USERNAME }}
