@@ -19,3 +19,5 @@ runcmd:
   - systemctl start docker
   - docker build /home/ec2-user -t docker-nginx
   - docker run -d -p 80:80 --name test docker-nginx
+  - sudo setfacl -m u:ec2-user:rwx /var/run/docker.sock
+
