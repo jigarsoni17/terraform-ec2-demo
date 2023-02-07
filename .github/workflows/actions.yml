@@ -23,20 +23,13 @@ jobs:
       - name: Checkout the repo 
         uses: actions/checkout@v2
 
-      - name: Deploy to Dev server
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ env.DEV_DNS }}
-          REMOTE_USER: ${{ env.USERNAME }}
-
-      - name: Stop Docker Container
-        # working-directory: /home/runner/work/terraform-ec2-demo
-        run: |
-          pwd
-          chmod +x ./stop-rm.sh
-          sh ./stop-rm.sh
-        shell: bash
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ env.DEV_DNS }}
+          username: ${{ env.USERNAME }}
+          password: ${{ secrets.EC2_SSH_KEY }}
+          script: stop-rm.sh
 
   build-svc:
     runs-on: ubuntu-latest
