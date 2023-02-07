@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ development, main ]
+    branches: [ development ]
     
 env:
   PROD_DNS: 'ip-10-0-2-249.ec2.internal' 
