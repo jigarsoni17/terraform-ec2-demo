@@ -5,8 +5,8 @@ on:
     branches: [ development, main ]
     
 env:
-  PROD_DNS: 
-  DEV_DNS:
+  PROD_DNS:"ip-10-0-2-249.ec2.internal" 
+  DEV_DNS:"ip-10-0-1-91.ec2.internal"
   USERNAME: ec-user
   TARGET: /home/ec2-user
 
