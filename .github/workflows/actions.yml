@@ -15,26 +15,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo 
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
   docker:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo 
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Stop Docker Container
-        working-directory: /home/runner/work/terraform-ec2-demo
+        # working-directory: /home/runner/work/terraform-ec2-demo
         run: |
           pwd
-          sh stop-rm.sh
+          sh ./stop-rm.sh
         shell: bash
 
   build-svc:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        name: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - uses: pmorelli92/github-container-registry-build-push@2.0.0
         name: Build and Publish latest service image
