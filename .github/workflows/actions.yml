@@ -65,6 +65,7 @@ jobs:
           script: |
               docker pull ghcr.io/jigarsoni17/docker-nginx:latest
               docker build -t docker-nginx .
+              docker run -d -p 80:80 --name test docker-nginx
       
       # - name: Deploy to Dev server
       #   uses: easingthemes/ssh-deploy@main
