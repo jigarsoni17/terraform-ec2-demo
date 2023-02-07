@@ -5,10 +5,10 @@ on:
     branches: [ development, main ]
     
 env:
-  PROD_DNS:"ip-10-0-2-249.ec2.internal" 
-  DEV_DNS:"ip-10-0-1-91.ec2.internal"
-  USERNAME: ec-user
-  TARGET: /home/ec2-user
+  PROD_DNS: 'ip-10-0-2-249.ec2.interna' 
+  DEV_DNS: 'ip-10-0-1-91.ec2.internal'
+  USERNAME: 'ec-user'
+  TARGET: '/home/ec2-user'
 
 jobs:
   build_and_push:
