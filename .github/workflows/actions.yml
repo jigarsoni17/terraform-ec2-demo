@@ -50,9 +50,9 @@ jobs:
           build-context: .
           build-only: false
 
-    docker:
-      runs-on: ubuntu-latest
-      steps:
+  docker-nginx build:
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout the repo 
         uses: actions/checkout@v2 
     
