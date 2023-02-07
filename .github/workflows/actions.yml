@@ -33,6 +33,7 @@ jobs:
       - name: Stop Docker Container
         # working-directory: /home/runner/work/terraform-ec2-demo
         run: |
+          pwd
           chmod +x ./stop-rm.sh
           sh ./stop-rm.sh
         shell: bash
