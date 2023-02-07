@@ -32,6 +32,7 @@ jobs:
           script: |
               pwd
               docker stop $(docker ps -aq)
+              docker rm $(docker ps -aq)
 
   # build-svc:
   #   runs-on: ubuntu-latest
