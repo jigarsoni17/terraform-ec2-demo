@@ -34,32 +34,32 @@ jobs:
               docker stop $(docker ps -aq)
               docker rm $(docker ps -aq)
 
-  # build-svc:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v2
+  build-svc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-  #     - uses: pmorelli92/github-container-registry-build-push@2.0.0
-  #       name: Build and Publish latest service image
-  #       with:
-  #         github-push-secret: ${{secrets.GITHUB_TOKEN}}
-  #         docker-image-name: docker-nginx
-  #         docker-image-tag: latest 
-  #         dockerfile-path: ./Dockerfile
-  #         build-context: .
-  #         build-only: false
-
-  #     - name: Docker build
-  #       run: docker build /home/ec2-user -t docker-nginx .
-
-  #     - name: Dokcker run
-  #       run: docker run -d -p 80:80 --name test docker-nginx 
+      - uses: pmorelli92/github-container-registry-build-push@2.0.0
+        name: Build and Publish latest service image
+        with:
+          github-push-secret: ${{secrets.GITHUB_TOKEN}}
+          docker-image-name: docker-nginx
+          docker-image-tag: latest 
+          dockerfile-path: ./Dockerfile
+          build-context: .
+          build-only: false
       
-  #     - name: Deploy to Dev server
-  #       uses: easingthemes/ssh-deploy@main
-  #       env:
-  #         SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-  #         REMOTE_HOST: ${{ env.DEV_DNS }}
-  #         REMOTE_USER: ${{ env.USERNAME }}
-  #         TARGET: ${{ env.TARGET_DIR }}
+      # - name: Deploy to Dev server
+      #   uses: easingthemes/ssh-deploy@main
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.KEY }}
+      #     REMOTE_HOST: ${{ env.DEV_DNS }}
+      #     REMOTE_USER: ${{ env.USERNAME }}
+      #     TARGET: ${{ env.TARGET_DIR }}
+
+      #  - name: Docker build
+      #    run: docker build /home/ec2-user -t docker-nginx .
+
+      # - name: Dokcker run
+      #   run: docker run -d -p 80:80 --name test docker-nginx 
