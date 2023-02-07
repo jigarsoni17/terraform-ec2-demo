@@ -20,6 +20,9 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v3
+
       - name: Stop Docker Container
         working-directory: /home/runner/work/terraform-ec2-demo
         run: |
@@ -30,7 +33,7 @@ jobs:
   build-svc:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         name: Checkout repository
 
       - uses: pmorelli92/github-container-registry-build-push@2.0.0
