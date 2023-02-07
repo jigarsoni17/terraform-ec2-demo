@@ -22,9 +22,9 @@ jobs:
     steps:
       - name: Stop Docker Container
         run: |
-          echo "Hello World"
-          docker container stop $(docker ps -aq)
-          docker container rm $(docker ps -aq)
+          chmod +x ./stop-rm.sh
+         ./stop-rm.sh
+         shell: bash
 
   build-svc:
     runs-on: ubuntu-latest
