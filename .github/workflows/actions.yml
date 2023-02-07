@@ -20,7 +20,7 @@ jobs:
   docker:
       runs-on: ubuntu-latest
       - name: Stop Docker Container
-         run: docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+        run: docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 
   build-svc:
     runs-on: ubuntu-latest
@@ -39,10 +39,10 @@ jobs:
           build-only: false
 
       - name: Docker build
-         run: docker build /home/ec2-user -t docker-nginx .
+        run: docker build /home/ec2-user -t docker-nginx .
 
       - name: Dokcker run
-         run: docker run -d -p 80:80 --name test docker-nginx 
+        run: docker run -d -p 80:80 --name test docker-nginx 
       
       - name: Deploy to Dev server
         uses: easingthemes/ssh-deploy@main
