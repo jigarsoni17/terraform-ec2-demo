@@ -22,8 +22,8 @@ jobs:
     steps:
       - name: Stop Docker Container
         run: |
-        pwd
-        bash ${GITHUB_WORKSPACE}/stop-rm.sh
+          pwd
+          bash ${GITHUB_WORKSPACE}/stop-rm.sh
         shell: bash
 
   build-svc:
