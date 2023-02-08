@@ -4,11 +4,11 @@ on:
   push:
     branches: [ development ]
     
-env:
-  PROD_DNS: 'ip-10-0-2-249.ec2.internal' 
-  DEV_DNS: 'ip-10-0-1-91.ec2.internal'
-  USERNAME: 'ec-user'
-  TARGET: '/home/ec2-user'
+# env:
+#   PROD_DNS: 'ip-10-0-2-249.ec2.internal' 
+#   DEV_DNS: 'ec2-34-230-78-100.compute-1.amazonaws.com'
+#   USERNAME: 'ec-user'
+#   TARGET: '/home/ec2-user'
 
 jobs:
   build_and_push:
@@ -20,35 +20,70 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+<<<<<<< HEAD
       - name: Stop Docker Container
         run: bash ${GITHUB_WORKSPACE}/stop-rm.sh
+=======
+      - name: Checkout the repo 
+        uses: actions/checkout@v2 
+    
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+              docker stop $(docker ps -aq)
+              docker rm $(docker ps -aq)
+>>>>>>> 0ee2be5ce04c9779a43fa7c49198e3a6a6002a8e
 
-  build-svc:
+  build-docker-image:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        name: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - uses: pmorelli92/github-container-registry-build-push@2.0.0
-        name: Build and Publish latest service image
+      - name: Building a Latest Docker Image
+        uses: docker/login-action@v1
         with:
-          github-push-secret: ${{secrets.GITHUB_TOKEN}}
-          docker-image-name: docker-nginx
-          docker-image-tag: latest 
-          dockerfile-path: ./Dockerfile
-          build-context: .
-          build-only: false
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build the docker-nginx image
+        run: |
+          docker build . --file Dockerfile --tag ghcr.io/jigarsoni17/docker-nginx
+          docker push ghcr.io/jigarsoni17/docker-nginx
 
-      - name: Docker build
-        run: docker build /home/ec2-user -t docker-nginx .
+  pull_docker:
+    needs: build-docker-image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2 
+    
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+              docker pull ghcr.io/jigarsoni17/docker-nginx:latest
+              docker run -itd -p 80:80 ghcr.io/jigarsoni17/docker-nginx:latest
 
-      - name: Dokcker run
-        run: docker run -d -p 80:80 --name test docker-nginx 
+
       
-      - name: Deploy to Dev server
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ env.DEV_DNS }}
-          REMOTE_USER: ${{ env.USERNAME }}
-          TARGET: ${{ env.TARGET_DIR }}
+#         docker run ghcr.io/jigarsoni17/docker-nginx:latest
+
+
+
+      # - uses: pmorelli92/github-container-registry-build-push@2.0.0
+      #   name: Build and Publish latest service image
+      #   with:
+      #     github-push-secret: ${{secrets.GITHUB_TOKEN}}
+      #     docker-image-name: docker-nginx
+      #     docker-image-tag: latest 
+      #     dockerfile-path: ./Dockerfile
+      #     build-context: .
+      #     build-only: false
