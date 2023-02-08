@@ -20,12 +20,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-<<<<<<< HEAD
-=======
-      - name: Stop Docker Container
-        run: bash ${GITHUB_WORKSPACE}/stop-rm.sh
-
->>>>>>> a36c95557ac4f31940cc931843ff88ab094e5145
       - name: Checkout the repo 
         uses: actions/checkout@v2 
     
