@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+    types: [ closed ]
+
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2 
+    
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+              docker stop $(docker ps -aq)
+              docker rm $(docker ps -aq)
+
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Building a Latest Docker Image
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build the docker-nginx image
+        run: |
+          docker build . --file Dockerfile --tag ghcr.io/jigarsoni17/docker-nginx
+          docker push ghcr.io/jigarsoni17/docker-nginx
+
+  pull_docker:
+    needs: build-docker-image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2 
+    
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+              docker pull ghcr.io/jigarsoni17/docker-nginx:latest
+              docker run -itd -p 80:80 ghcr.io/jigarsoni17/docker-nginx:latest
+
+
+      
+#         docker run ghcr.io/jigarsoni17/docker-nginx:latest
+
+
+
+      # - uses: pmorelli92/github-container-registry-build-push@2.0.0
+      #   name: Build and Publish latest service image
+      #   with:
+      #     github-push-secret: ${{secrets.GITHUB_TOKEN}}
+      #     docker-image-name: docker-nginx
+      #     docker-image-tag: latest 
+      #     dockerfile-path: ./Dockerfile
+      #     build-context: .
+      #     build-only: false
