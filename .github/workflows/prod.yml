@@ -7,9 +7,9 @@ on:
 
 jobs:
   
-  if: ${{github.event.pull_request.merged == true}}
   build_and_push:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout the repo 
         uses: actions/checkout@v2
