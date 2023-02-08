@@ -6,8 +6,9 @@ on:
     types: [ closed ]
 
 jobs:
-  build_and_push:
+  
   if: ${{github.event.pull_request.merged == true}}
+  build_and_push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo 
