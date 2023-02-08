@@ -78,7 +78,7 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
               docker pull ghcr.io/jigarsoni17/docker-nginx:latest
-              docker build -t docker-nginx .
+              docker build --file Dockerfile -t docker-nginx .
               docker run -d -p 80:80 --name test docker-nginx
       
 
