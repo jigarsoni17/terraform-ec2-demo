@@ -47,8 +47,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build the docker-nginx image
         run: |
-          docker build . --file Dockerfile --tag ghcr.io/jigarsoni17/docker-nginx:latest
-          docker push ghcr.io/jigarsoni17/docker-nginx:latest
+          docker build . --file Dockerfile --tag ghcr.io/jigarsoni17/docker-nginx
+          docker push ghcr.io/jigarsoni17/docker-nginx
 
   pull_docker:
     runs-on: ubuntu-latest
