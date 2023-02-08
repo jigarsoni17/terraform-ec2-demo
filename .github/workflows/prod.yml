@@ -1,15 +1,15 @@
 name: CI
 
 on:
-  pull_request:
+  push:
     branches: [ main ]
-    types: [ closed ]
+    # types: [ closed ]
 
 jobs:
   
   build_and_push:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     steps:
       - name: Checkout the repo 
         uses: actions/checkout@v2
