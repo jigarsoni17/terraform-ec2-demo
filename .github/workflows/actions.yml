@@ -50,6 +50,7 @@ jobs:
           docker build . --file Dockerfile --tag ghcr.io/jigarsoni17/docker-nginx
           docker push ghcr.io/jigarsoni17/docker-nginx
 
+jobs:
   pull_docker:
     runs-on: ubuntu-latest
     steps:
