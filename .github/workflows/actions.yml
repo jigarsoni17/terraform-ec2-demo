@@ -78,6 +78,6 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
               docker pull ghcr.io/jigarsoni17/docker-nginx:latest
-              docker run -d -p 80:80 --name test docker-nginx
+              docker run ghcr.io/jigarsoni17/docker-nginx:latest
       
 
