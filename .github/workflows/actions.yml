@@ -20,10 +20,9 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-<<<<<<< HEAD
       - name: Stop Docker Container
         run: bash ${GITHUB_WORKSPACE}/stop-rm.sh
-=======
+
       - name: Checkout the repo 
         uses: actions/checkout@v2 
     
@@ -36,7 +35,6 @@ jobs:
           script: |
               docker stop $(docker ps -aq)
               docker rm $(docker ps -aq)
->>>>>>> 0ee2be5ce04c9779a43fa7c49198e3a6a6002a8e
 
   build-docker-image:
     runs-on: ubuntu-latest
