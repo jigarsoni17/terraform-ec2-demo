@@ -85,3 +85,36 @@ Copy all the content which is start with  " -----BEGIN RSA PRIVATE KEY----- "
 - **USERNAME** = "ec2-user"
 
 
+# Now go to your local Machine Folder Where git is cloned ans RUN some commands
+
+- Modify Content of "index.html"
+```
+sudo vim index.html
+```
+- Now RUN Below Commands
+```
+git add index.html
+```
+```
+git commit -m " your commit message"
+```
+```
+git push origin development
+```
+```
+git checkout main
+```
+```
+git pull
+```
+```
+git checkout development
+```
+```
+git merge origin/main
+```
+```
+git push origin development:main
+```
+-  By Running this Commands it will Trigger **GIT ACTIONS** 
+
