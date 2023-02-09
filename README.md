@@ -28,7 +28,7 @@ git config --global user.name "FIRST_NAME LAST_NAME"
 
 ```
 ```
-git config user.email "MY_NAME@example.com"
+git config --global user.email "MY_NAME@example.com"
 ```
 
 # Generate git TOKEN 
