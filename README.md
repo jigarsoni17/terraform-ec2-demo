@@ -71,12 +71,17 @@ After succesfully complition of Terrform ".pem" is generated into your folder wh
 sudo cat ".pem Key Name"
 ```
 
-- First We set "KEY"
-
 
 Copy all the content which is start with  " -----BEGIN RSA PRIVATE KEY----- "
 " -----END RSA PRIVATE KEY----- "
 
-Now go to your git repo and ADD Secrets AS per Below Image
+# Now go to your git repo and ADD Secrets AS per Below Image
 
 ![Refrance IMAGE](https://github.com/jigarsoni17/terraform-ec2-demo/blob/c671a7eebaa3c0c64ddd734c52789bf6d4bee55e/Screenshot%20from%202023-02-09%2011-13-50.png)
+
+- **KEY** = "Your .Pem Key"
+- **HOST** = " ec2-user@ec2-x-xx-xxx-xxx.compute-1.amazonaws.com "
+- **PROD_HOST** = " ec2-user@ec2-x-xx-xxx-xxx.compute-1.amazonaws.com "
+- **USERNAME** = "ec2-user"
+
+
