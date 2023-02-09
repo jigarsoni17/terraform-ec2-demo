@@ -28,7 +28,7 @@ git config --global user.name "FIRST_NAME LAST_NAME"
 
 ```
 ```
-git config --global user.name "FIRST_NAME LAST_NAME"
+git config user.email "MY_NAME@example.com"
 ```
 
 # Generate git TOKEN 
@@ -44,7 +44,6 @@ git config --global user.name "FIRST_NAME LAST_NAME"
 
 ```
 git clone https://github.com/jigarsoni17/terraform-ec2-demo.git
-
 ```
 
 # Now Follow Below Terraform Steps where you clone git repo
@@ -59,6 +58,4 @@ Sudo terraform plan
 ```
 sudo terraform apply
 ```
-
-
 
