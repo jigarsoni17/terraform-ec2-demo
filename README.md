@@ -45,6 +45,7 @@ git config --global user.email "MY_NAME@example.com"
 ```
 git clone https://github.com/jigarsoni17/terraform-ec2-demo.git
 ```
+- NOTE: Push this Repo into your GIT Account.
 
 # Now Follow Below Terraform Steps where you clone git repo
 
@@ -59,3 +60,23 @@ Sudo terraform plan
 sudo terraform apply
 ```
 
+# Now Require Some Configuration 
+
+## Set up a Git Secrets 
+
+
+After succesfully complition of Terrform ".pem" is generated into your folder where you cloned git repo, now simply Some commands as Below
+
+```
+sudo cat ".pem Key Name"
+```
+
+- First We set "KEY"
+
+
+Copy all the content which is start with  " -----BEGIN RSA PRIVATE KEY----- "
+" -----END RSA PRIVATE KEY----- "
+
+Now go to your git repo and ADD Secrets AS per Below Image
+
+![Refrance IMAGE](https://github.com/jigarsoni17/terraform-ec2-demo/blob/c671a7eebaa3c0c64ddd734c52789bf6d4bee55e/Screenshot%20from%202023-02-09%2011-13-50.png)
