@@ -11,6 +11,7 @@ Deploy Containerise WEB-APPLICATION Using Terraform
 - Install Terraform 
 - Install Git
 - Install AWS Cli
+- GIT Actions
 
 
 # Now First Configure AWS Cli into your LOcal Machine
